@@ -5,6 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
   };
   return (
     <div className="hero min-h-screen bg-base-200 my-2">

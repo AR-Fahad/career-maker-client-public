@@ -3,6 +3,12 @@ import reg from "../../assets/create.png";
 const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const img = form.img.value;
+    console.log(name, email, password, img);
   };
   return (
     <div className="hero min-h-screen bg-base-200 my-2">
