@@ -1,14 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../../assets/login.png";
 import { FcGoogle } from "react-icons/fc";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
+  const [error, setError] = useState(null);
+  const { googleSignIn, loginAccount } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleLogin = (e) => {
     e.preventDefault();
-    const form = event.target;
+    const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+    setError(null);
+    loginAccount(email, password)
+      .then(() => {
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        console.log(err);
+        setError("Invalid email or password");
+      });
+  };
+  const handleGoogle = () => {
+    googleSignIn().then(() => navigate(location?.state ? location.state : "/"));
   };
   return (
     <div className="hero min-h-screen bg-base-200 my-2">
@@ -49,6 +67,7 @@ const Login = () => {
                 </a>
               </label>
             </div>
+            {error && <p className="text-red-600">{error}</p>}
             <div className="form-control mt-6">
               <input
                 type="submit"
@@ -67,7 +86,7 @@ const Login = () => {
             <br />
             <p className="text-pink-500 text-xl font-bold">Or</p>
             <br />
-            <button className="btn btn-outline">
+            <button onClick={handleGoogle} className="btn btn-outline">
               <FcGoogle></FcGoogle> Google Sign in
             </button>
           </div>

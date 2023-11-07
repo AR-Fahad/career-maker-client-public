@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import reg from "../../assets/create.png";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
 const Register = () => {
+  const [error, setError] = useState(null);
+  const { createAccount } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -8,7 +16,38 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const img = form.img.value;
-    console.log(name, email, password, img);
+    console.log(name, email, password.length, img);
+    setError(null);
+
+    if (
+      password.length < 6 ||
+      !/[A-Z]/.test(password) ||
+      !/[a-z]/.test(password) ||
+      !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\]/.test(password)
+    ) {
+      setError("password need to strong and more then 5 characters");
+      return;
+    }
+
+    createAccount(email, password)
+      .then((data) => {
+        console.log(data.user);
+        updateProfile(data.user, {
+          displayName: name,
+          photoURL: img,
+        })
+          .then(() => {
+            toast("Successfully registered");
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        setError("Already have an account with this email");
+      });
   };
   return (
     <div className="hero min-h-screen bg-base-200 my-2">
@@ -73,6 +112,7 @@ const Register = () => {
                 required
               />
             </div>
+            {error && <p className="text-red-600">{error}</p>}
             <div className="form-control mt-6">
               <input
                 type="submit"

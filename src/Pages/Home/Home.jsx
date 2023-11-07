@@ -12,6 +12,8 @@ import Marquee from "react-fast-marquee";
 import { FaAward, FaRegLightbulb } from "react-icons/fa";
 import { MdSupportAgent } from "react-icons/md";
 import { AiFillLike } from "react-icons/ai";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const services = useLoaderData().data;
@@ -126,6 +128,7 @@ const Home = () => {
           <AiFillLike className="w-1/2 mx-auto text-5xl text-pink-500"></AiFillLike>
           <p className="text-center font-semibold">FLEXIBLE CANCELLATION</p>
         </div>
+        <ToastContainer></ToastContainer>
       </div>
     </>
   );
