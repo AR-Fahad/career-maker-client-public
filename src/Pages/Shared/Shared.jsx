@@ -20,8 +20,8 @@ const Shared = () => {
 
   return (
     <div>
-      <div>
-        <div className="navbar sticky top-0 bg-gradient-to-r from-pink-200 to-pink-500">
+      <div className="sticky top-0 z-10">
+        <div className="navbar bg-gradient-to-r from-pink-200 to-pink-500">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -68,7 +68,6 @@ const Shared = () => {
           <div className="navbar-center hidden items-center lg:flex">
             <ul className="flex gap-5 px-1 text-white">
               {navLink}
-
               <div className="dropdown">
                 <label className="hover:cursor-pointer" tabIndex={0}>
                   Dashboard <BsFillCaretDownFill className="inline" />
@@ -91,12 +90,16 @@ const Shared = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <Link className="btn btn-xs md:btn-sm btn-outline border-white text-white">
+            <Link
+              to="/register"
+              className="btn btn-xs md:btn-sm btn-outline border-white text-white"
+            >
               Register
             </Link>
           </div>
         </div>
       </div>
+
       <Outlet></Outlet>
 
       <footer className="footer footer-center p-10 bg-base-200 text-base-content">
