@@ -2,8 +2,12 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./styles/nav.css";
 import { BsFillCaretDownFill } from "react-icons/bs";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import profile from "../../assets/profile.jpg";
 
 const Shared = () => {
+  const { user, userLogout } = useContext(AuthContext);
   const navLink = (
     <>
       <li>
@@ -12,9 +16,11 @@ const Shared = () => {
       <li>
         <NavLink to="/services">Services</NavLink>
       </li>
-      <li>
-        <NavLink to="/login">Login</NavLink>
-      </li>
+      {!user && (
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -45,9 +51,40 @@ const Shared = () => {
                 className="menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-base-100 rounded-box w-44"
               >
                 {navLink}
-                <li>
-                  <a>Dashboard</a>
-                  <ul className="p-2 space-y-2">
+                {user && (
+                  <li>
+                    <a>Dashboard</a>
+                    <ul className="p-2 space-y-2">
+                      <li>
+                        <NavLink to="/my-schedules">My-Schedules</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/add-service">Add-Services</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/my-services">My-Services</NavLink>
+                      </li>
+                    </ul>
+                  </li>
+                )}
+              </ul>
+            </div>
+            <Link to="/" className="btn btn-ghost normal-case text-xl">
+              <img className="w-14 md:w-20" src={logo} alt="" />
+            </Link>
+          </div>
+          <div className="navbar-center hidden items-center lg:flex">
+            <ul className="flex gap-5 px-1 text-white">
+              {navLink}
+              {user && (
+                <div className="dropdown">
+                  <label className="hover:cursor-pointer" tabIndex={0}>
+                    Dashboard <BsFillCaretDownFill className="inline" />
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-[1] menu mt-3 p-2 shadow bg-blend-darken text-black rounded-box w-52"
+                  >
                     <li>
                       <NavLink to="/my-schedules">My-Schedules</NavLink>
                     </li>
@@ -58,44 +95,37 @@ const Shared = () => {
                       <NavLink to="/my-services">My-Services</NavLink>
                     </li>
                   </ul>
-                </li>
-              </ul>
-            </div>
-            <Link to="/" className="btn btn-ghost normal-case text-xl">
-              <img className="w-16 md:w-20" src={logo} alt="" />
-            </Link>
-          </div>
-          <div className="navbar-center hidden items-center lg:flex">
-            <ul className="flex gap-5 px-1 text-white">
-              {navLink}
-              <div className="dropdown">
-                <label className="hover:cursor-pointer" tabIndex={0}>
-                  Dashboard <BsFillCaretDownFill className="inline" />
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content z-[1] menu mt-3 p-2 shadow bg-blend-darken rounded-box w-52"
-                >
-                  <li>
-                    <NavLink to="/my-schedules">My-Schedules</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/add-service">Add-Services</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/my-services">My-Services</NavLink>
-                  </li>
-                </ul>
-              </div>
+                </div>
+              )}
             </ul>
           </div>
           <div className="navbar-end">
-            <Link
-              to="/register"
-              className="btn btn-xs md:btn-sm btn-outline border-white text-white"
-            >
-              Register
-            </Link>
+            {user ? (
+              <>
+                <div className="flex gap-1 items-center">
+                  <img
+                    className="w-8 md:w-10 rounded-full"
+                    src={user?.photoURL ? user.photoURL : profile}
+                  />
+                  <p className="text-white text-[10px] md:text-base">
+                    {user?.displayName}
+                  </p>
+                  <button
+                    onClick={userLogout}
+                    className="btn btn-xs md:btn-sm btn-outline border-white text-white"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
+            ) : (
+              <Link
+                to="/register"
+                className="btn btn-xs md:btn-sm btn-outline border-white text-white"
+              >
+                Register
+              </Link>
+            )}
           </div>
         </div>
       </div>
