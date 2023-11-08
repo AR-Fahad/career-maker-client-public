@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import profile from "../../../assets/profile.jpg";
 const ServiceCard = ({ service }) => {
   const {
     _id,
@@ -22,8 +22,12 @@ const ServiceCard = ({ service }) => {
       </figure>
       <div className="card-body w-full">
         <h2 className="card-title">{service_name}</h2>
-        <div className="flex gap-2">
-          <img className="w-10 rounded-full" src={provider_img} alt="" />
+        <div className="flex gap-2 items-center">
+          <img
+            className="w-8 rounded-full"
+            src={provider_img ? provider_img : profile}
+            alt=""
+          />
           <p>{provider_name}</p>
         </div>
         <p>{description}</p>
