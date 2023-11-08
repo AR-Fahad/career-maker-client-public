@@ -3,8 +3,14 @@ import axiosInstance from "../../../AxiosInstance/instance";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import React from "react";
 const MyService = ({ service, services, setServices }) => {
   const { _id, img, service_name, price, description, area } = service;
+  const buttonRef = React.createRef();
+
+  const closeModal = () => {
+    buttonRef.current.click();
+  };
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -31,6 +37,7 @@ const MyService = ({ service, services, setServices }) => {
         });
         setServices(updatedServices);
         toast("Updated successfully");
+        closeModal();
       }
     });
   };
@@ -158,7 +165,9 @@ const MyService = ({ service, services, setServices }) => {
               </form>
               <div className="modal-action">
                 <form method="dialog">
-                  <button className="btn btn-outline btn-sm">close</button>
+                  <button ref={buttonRef} className="btn btn-outline btn-sm">
+                    close
+                  </button>
                 </form>
               </div>
             </div>

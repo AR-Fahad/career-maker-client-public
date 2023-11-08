@@ -79,7 +79,7 @@ const AddService = () => {
                 <span className="label-text">Service Name:</span>
               </label>
               <input
-                type="tel"
+                type="text"
                 placeholder="Service name"
                 name="service"
                 className="input input-bordered"

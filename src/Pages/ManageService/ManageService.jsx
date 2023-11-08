@@ -32,7 +32,7 @@ const ManageService = () => {
       </Helmet>
       <div className="my-10">
         <h3 className="text-center text-2xl font-bold text-pink-500">
-          Your Total Services: {services.length}
+          Your Total Added Services: {services.length}
         </h3>
         <div className="grid px-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-16">
           {services.map((service) => (

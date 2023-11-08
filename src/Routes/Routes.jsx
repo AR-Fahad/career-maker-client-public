@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import AllServices from "../Pages/AllServices/AllServices";
 import AddService from "../Pages/AddService/AddService";
 import ManageService from "../Pages/ManageService/ManageService";
+import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
       {
         path: "/my-services",
         element: <ManageService></ManageService>,
+      },
+      {
+        path: "/services/:id",
+        element: <ServiceDetails></ServiceDetails>,
+        loader: ({ params }) => axiosInstance.get(`/services/${params.id}`),
       },
     ],
   },
