@@ -36,7 +36,12 @@ const ManageService = () => {
         </h3>
         <div className="grid px-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-16">
           {services.map((service) => (
-            <MyService key={service._id} service={service}></MyService>
+            <MyService
+              key={service._id}
+              service={service}
+              services={services}
+              setServices={setServices}
+            ></MyService>
           ))}
         </div>
       </div>

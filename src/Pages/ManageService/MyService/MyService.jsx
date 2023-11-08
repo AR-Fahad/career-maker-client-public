@@ -1,10 +1,9 @@
 import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
 import axiosInstance from "../../../AxiosInstance/instance";
+import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
-
-const MyService = ({ service }) => {
+const MyService = ({ service, services, setServices }) => {
   const { _id, img, service_name, price, description, area } = service;
 
   const handleUpdate = (e) => {
@@ -20,8 +19,45 @@ const MyService = ({ service }) => {
     axiosInstance.patch(`services/${_id}`, updateService).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount === 1) {
+        let updatedServices = [...services];
+        updatedServices.filter((s) => {
+          if (s._id === _id) {
+            s.service_name = service_name;
+            s.img = img;
+            s.area = area;
+            s.description = description;
+            s.price = price;
+          }
+        });
+        setServices(updatedServices);
         toast("Updated successfully");
-        window.location.reload(false);
+      }
+    });
+  };
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosInstance.delete(`/services/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount === 1) {
+            setServices(services.filter((s) => s._id !== id));
+
+            Swal.fire({
+              title: "Deleted",
+              text: "Deleted successfully",
+              icon: "success",
+            });
+          }
+        });
       }
     });
   };
@@ -128,7 +164,7 @@ const MyService = ({ service }) => {
             </div>
           </dialog>
           <button
-            // onClick={() => handleDelete(_id)}
+            onClick={() => handleDelete(_id)}
             className="btn btn-square btn-outline btn-secondary"
           >
             <AiFillDelete></AiFillDelete>
