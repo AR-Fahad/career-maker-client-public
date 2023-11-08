@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axiosInstance from "../../AxiosInstance/instance";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
@@ -37,6 +38,9 @@ const AddService = () => {
 
   return (
     <>
+      <Helmet>
+        <title>GoTravel | Add-Services</title>
+      </Helmet>
       <div className="card w-full shadow-2xl bg-base-100 lg:p-20">
         <h3 className="text-center text-3xl font-bold text-pink-500">
           Add a Service
