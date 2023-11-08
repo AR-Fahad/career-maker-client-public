@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import axiosInstance from "../AxiosInstance/instance";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import AllServices from "../Pages/AllServices/AllServices";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/services",
+        element: <AllServices></AllServices>,
+        loader: () => axiosInstance.get("/services"),
       },
     ],
   },

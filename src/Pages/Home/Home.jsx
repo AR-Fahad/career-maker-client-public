@@ -14,6 +14,7 @@ import { MdSupportAgent } from "react-icons/md";
 import { AiFillLike } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Typewriter } from "react-simple-typewriter";
 
 const Home = () => {
   const services = useLoaderData().data;
@@ -68,6 +69,19 @@ const Home = () => {
             <img src={slider4} alt="" />
           </div>
         </Marquee>
+        <br />
+        <h3 className="text-2xl md:text-3xl font-bold text-center">
+          Travel is for{" "}
+          <span className="text-pink-500">
+            <Typewriter
+              words={["Refresh", "Trip", "Pleasure", "Peace"]}
+              loop={Infinity}
+              typeSpeed={100}
+              cursor
+            ></Typewriter>
+          </span>
+        </h3>
+        <br />
       </div>
       <hr className="hidden md:flex" />
       {/* Services card */}
@@ -83,7 +97,11 @@ const Home = () => {
             <ServiceCard key={service._id} service={service}></ServiceCard>
           ))}
         </div>
-        <div className="text-center">
+        <div
+          data-aos="fade-up"
+          data-aos-duration="3000"
+          className="text-center"
+        >
           <Link to="/services" className="btn btn-sm btn-outline">
             Show All Services
           </Link>

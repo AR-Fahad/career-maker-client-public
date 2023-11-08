@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ServiceCard = ({ service }) => {
+const SingleService = ({ service }) => {
   const {
     _id,
     img,
@@ -9,30 +9,26 @@ const ServiceCard = ({ service }) => {
     provider_img,
     description,
     price,
+    area,
   } = service;
-
   return (
-    <div
-      data-aos="fade-up"
-      data-aos-duration="3000"
-      className="card md:card-side bg-base-100 shadow-xl rounded-lg"
-    >
+    <div className="card card-compact bg-base-100 shadow-xl">
       <figure>
-        <img className="rounded-lg" src={img} alt="" />
+        <img src={img} alt="Shoes" />
       </figure>
-      <div className="card-body w-full">
+      <div className="card-body">
         <h2 className="card-title">{service_name}</h2>
+        <p>{description}</p>
         <div className="flex gap-2">
           <img className="w-10 rounded-full" src={provider_img} alt="" />
           <p>{provider_name}</p>
         </div>
-        <p>{description}</p>
-        <p> Price: {price}</p>
-
+        <p>Service Area: {area}</p>
+        <p>Price: {price}</p>
         <div className="card-actions justify-start">
           <Link
             to={`/services/${_id}`}
-            className="btn btn-secondary btn-sm btn-outline"
+            className="btn btn-outline btn-sm btn-secondary"
           >
             View Details
           </Link>
@@ -42,4 +38,4 @@ const ServiceCard = ({ service }) => {
   );
 };
 
-export default ServiceCard;
+export default SingleService;

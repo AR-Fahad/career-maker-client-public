@@ -26,7 +26,7 @@ const Shared = () => {
 
   return (
     <div>
-      <div className="sticky top-0 z-10">
+      <div className="sticky top-0 z-20">
         <div className="navbar bg-gradient-to-r from-pink-200 to-pink-500">
           <div className="navbar-start">
             <div className="dropdown">
@@ -83,7 +83,7 @@ const Shared = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content z-[1] menu mt-3 p-2 shadow bg-blend-darken text-black rounded-box w-52"
+                    className="dropdown-content z-[1] menu mt-3 p-2 shadow bg-blend-darken text-pink-500 rounded-box w-52"
                   >
                     <li>
                       <NavLink to="/my-schedules">My-Schedules</NavLink>
