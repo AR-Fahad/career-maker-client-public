@@ -37,6 +37,20 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    axiosInstance.interceptors.response.use(
+      (res) => {
+        return res;
+      },
+      (err) => {
+        // console.log(err);
+        if (err.response.status === 401 || err.response.status === 403) {
+          userLogout();
+        }
+      }
+    );
+  }, []);
+
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
