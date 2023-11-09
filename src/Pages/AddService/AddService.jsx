@@ -32,6 +32,7 @@ const AddService = () => {
       console.log(res.data);
       if (res.data.insertedId) {
         toast("Successfully added a service");
+        form.reset();
       }
     });
   };

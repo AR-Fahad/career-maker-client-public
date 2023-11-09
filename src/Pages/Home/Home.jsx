@@ -18,6 +18,7 @@ import { Typewriter } from "react-simple-typewriter";
 
 const Home = () => {
   const services = useLoaderData().data;
+
   return (
     <>
       <Helmet>
@@ -47,6 +48,7 @@ const Home = () => {
         </a>
       </div>
       {/* slider */}
+
       <div className="text-center my-10">
         <h3 className="text-2xl md:text-3xl text-pink-500 font-bold">
           SPOTLIGHT DESTINATIONS
@@ -83,6 +85,7 @@ const Home = () => {
         </h3>
         <br />
       </div>
+
       <hr className="hidden md:flex" />
       {/* Services card */}
       <div className="my-10">
