@@ -9,6 +9,7 @@ import AddService from "../Pages/AddService/AddService";
 import ManageService from "../Pages/ManageService/ManageService";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 import MySchedules from "../Pages/MySchedules/MySchedules";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -35,19 +36,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-service",
-        element: <AddService></AddService>,
+        element: (
+          <PrivateRoutes>
+            <AddService></AddService>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/my-services",
-        element: <ManageService></ManageService>,
+        element: (
+          <PrivateRoutes>
+            <ManageService></ManageService>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/my-schedules",
-        element: <MySchedules></MySchedules>,
+        element: (
+          <PrivateRoutes>
+            <MySchedules></MySchedules>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/services/:id",
-        element: <ServiceDetails></ServiceDetails>,
+        element: (
+          <PrivateRoutes>
+            <ServiceDetails></ServiceDetails>
+          </PrivateRoutes>
+        ),
         loader: ({ params }) => axiosInstance.get(`/services/${params.id}`),
       },
     ],
