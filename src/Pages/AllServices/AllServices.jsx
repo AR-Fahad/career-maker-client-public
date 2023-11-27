@@ -3,6 +3,7 @@ import search from "../../assets/search.jpg";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import SingleService from "./SngleService/SingleService";
+import axiosInstance from "../../AxiosInstance/instance";
 const AllServices = () => {
   const loadedServices = useLoaderData().data;
   const [hide, setHide] = useState(false);
@@ -11,19 +12,24 @@ const AllServices = () => {
     e.preventDefault();
     const search = e.target.search.value;
     console.log(search);
-    if (search.toLowerCase() === "all" || search === "") {
-      setServices(loadedServices.slice(0, 6));
-      setHide(false);
+    if (search.toLowerCase() === "all") {
+      setServices(loadedServices);
+      setHide(true);
       e.target.reset();
       return;
     }
 
-    const searchingFilter = loadedServices.filter(
-      (service) => service.service_name.toLowerCase() === search.toLowerCase()
-    );
-    setServices(searchingFilter);
-    setHide(true);
-    e.target.reset();
+    if (search === "") {
+      setServices(loadedServices.slice(0, 6));
+      setHide(false);
+      return;
+    }
+
+    axiosInstance.get(`/services?search=${search}`).then((res) => {
+      setServices(res.data);
+      setHide(true);
+      e.target.reset();
+    });
   };
   return (
     <>
