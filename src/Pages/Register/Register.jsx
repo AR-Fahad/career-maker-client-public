@@ -24,7 +24,7 @@ const Register = () => {
       password.length < 6 ||
       !/[A-Z]/.test(password) ||
       !/[a-z]/.test(password) ||
-      !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\]/.test(password)
+      !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\]/.test(password)||
     ) {
       setError("password need to strong and more then 5 characters");
       return;
@@ -57,8 +57,8 @@ const Register = () => {
       </Helmet>
       <div className="hero min-h-screen bg-base-200 my-2">
         <div className="hero-content flex-col gap-5 lg:flex-row">
-          <div className="lg:w-1/2">
-            <img className="w-full mx-auto" src={reg} alt="" />
+          <div className="mx-auto lg:w-1/2">
+            <img className="w-full" src={reg} alt="" />
           </div>
           <div className="card flex-shrink-0 w-full py-5 max-w-sm shadow-2xl bg-base-100">
             <h1 className="text-4xl font-semibold text-center">Register</h1>
